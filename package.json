@@ -1,0 +1,19 @@
+{
+  "name": "@volkov190/react-document-visibility",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Volkov190/react-document-visibility.git"
+  },
+  "author": "Volkov Fedor f.volkov10@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Volkov190/react-document-visibility/issues"
+  },
+  "homepage": "https://github.com/Volkov190/react-document-visibility#readme"
+}
