@@ -1,6 +1,6 @@
 {
   "name": "@volkov190/react-document-visibility",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -44,6 +44,5 @@
   },
   "files": [
     "dist"
-  ],
-  "types": "dist/useDocumentVisibility.d.ts"
+  ]
 }
