@@ -5,7 +5,13 @@
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "scripts": {
+    "lint": "eslint --ext .ts,.tsx, src --fix",
     "build": "rollup -c -o dist/index.js"
+  },
+  "husky": { 
+    "hooks": { 
+      "pre-commit": "eslint --ext .ts,.tsx, src --fix && git add -A ." 
+    } 
   },
   "repository": {
     "type": "git",
@@ -34,13 +40,14 @@
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.1",
     "prettier": "^2.7.1",
+    "react": "^18.2.0",
     "rollup": "^2.75.7",
     "rollup-plugin-auto-external": "^2.0.0",
     "rollup-plugin-eslint": "^7.0.0",
     "rollup-plugin-typescript2": "^0.32.1",
-    "typescript": "^4.7.4",
-    "react": "^18.2.0"
+    "typescript": "^4.7.4"
   },
   "files": [
     "dist"
