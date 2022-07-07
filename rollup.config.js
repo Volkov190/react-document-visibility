@@ -1,8 +1,7 @@
 import { eslint } from "rollup-plugin-eslint";
-import uglify from "rollup-plugin-uglify";
-import typescript from "rollup-plugin-typescript";
+import typescript from "rollup-plugin-typescript2";
+import autoExternal from "rollup-plugin-auto-external";
 
-const env = process.env.NODE_ENV;
 import pkg from "./package.json";
 
 export default {
@@ -15,13 +14,22 @@ export default {
       sourcemap: true,
       strict: false,
     },
+    {
+      file: pkg.module,
+      format: "es",
+      exports: "named",
+      sourcemap: true,
+    },
   ],
   plugins: [
+    autoExternal(),
     eslint({
       throwOnError: true,
       exclude: ["node_modules/**", "lib/**", "*.js"],
     }),
-    typescript(),
-    env == "production" && uglify.uglify(),
+    typescript({
+      rollupCommonJSResolveHack: false,
+      clean: true,
+    }),
   ],
 };
