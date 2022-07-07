@@ -9,8 +9,7 @@ export default {
   output: [
     {
       file: pkg.main,
-      format: "cjs",
-      exports: "named",
+      format: "esm",
       sourcemap: true,
       strict: false,
     },
