@@ -1,33 +1,34 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export const useDocumentVisibility = () => {
-  const [visible, setVisible] = useState(!document.hidden);
+  const [visibleResult, setVisibleResult] = useState(!document.hidden);
   const [count, setCount] = useState(0);
 
+  const visible = useRef(!document.hidden);
+  const listeners = useRef<((isVisible: boolean) => void)[]>([]);
+
   const listener = () => {
-    if (visible && document.visibilityState === "hidden") {
+    if (visible.current && document.visibilityState === "hidden") {
       setCount((prevCount) => prevCount + 1);
     }
-    setVisible(!document.hidden);
+    visible.current = !document.hidden;
+    setVisibleResult(!document.hidden);
+    listeners.current.forEach((listener) => {
+      listener(visible.current);
+    });
   };
-
-  const [listeners, setListeners] = useState([listener]);
 
   useEffect(() => {
     document.addEventListener("visibilitychange", listener);
 
     return () => {
-      for (const listener of listeners) {
-        document.removeEventListener("visibilitychange", listener);
-      }
+      document.removeEventListener("visibilitychange", listener);
     };
   }, []);
 
   const onVisibilityChange = (func: (isVisible: boolean) => void) => {
-    const newListener = () => func(!document.hidden);
-    setListeners(listeners.concat(newListener));
-    document.addEventListener("visibilitychange", newListener);
+    listeners.current = [...listeners.current, func];
   };
 
-  return { count, visible, onVisibilityChange };
+  return { count, visible: visibleResult, onVisibilityChange };
 };
