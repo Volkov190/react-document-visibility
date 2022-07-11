@@ -1,20 +1,19 @@
 import { useState, useEffect, useRef } from "react";
 
 export const useDocumentVisibility = () => {
-  const [visibleResult, setVisibleResult] = useState(!document.hidden);
+  const [visible, setVisible] = useState(!document.hidden);
   const [count, setCount] = useState(0);
 
-  const visible = useRef(!document.hidden);
   const listeners = useRef<((isVisible: boolean) => void)[]>([]);
 
   const listener = () => {
-    if (visible.current && document.visibilityState === "hidden") {
+    if (document.visibilityState === "hidden") {
       setCount((prevCount) => prevCount + 1);
     }
-    visible.current = !document.hidden;
-    setVisibleResult(!document.hidden);
+
+    setVisible(!document.hidden);
     listeners.current.forEach((listener) => {
-      listener(visible.current);
+      listener(!document.hidden);
     });
   };
 
@@ -30,5 +29,5 @@ export const useDocumentVisibility = () => {
     listeners.current = [...listeners.current, func];
   };
 
-  return { count, visible: visibleResult, onVisibilityChange };
+  return { count, visible, onVisibilityChange };
 };
