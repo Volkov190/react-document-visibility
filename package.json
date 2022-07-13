@@ -1,10 +1,17 @@
 {
   "name": "@volkov190/react-document-visibility",
-  "version": "1.0.0",
+  "version": "1.0.13",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint --ext .ts,.tsx, src --fix",
+    "build": "rollup -c -o dist/index.js"
+  },
+  "husky": { 
+    "hooks": { 
+      "pre-commit": "eslint --ext .ts,.tsx, src --fix && git add -A ." 
+    } 
   },
   "repository": {
     "type": "git",
@@ -15,5 +22,34 @@
   "bugs": {
     "url": "https://github.com/Volkov190/react-document-visibility/issues"
   },
-  "homepage": "https://github.com/Volkov190/react-document-visibility#readme"
+  "homepage": "https://github.com/Volkov190/react-document-visibility#readme",
+  "peerDependencies": {
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^28.1.4",
+    "@types/node": "^18.0.3",
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
+    "@typescript-eslint/eslint-plugin": "^5.30.5",
+    "@typescript-eslint/parser": "^5.30.5",
+    "eslint": "^7.32.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.1",
+    "prettier": "^2.7.1",
+    "react": "^18.2.0",
+    "rollup": "^2.75.7",
+    "rollup-plugin-auto-external": "^2.0.0",
+    "rollup-plugin-typescript2": "^0.32.1",
+    "typescript": "^4.7.4"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ]
 }
